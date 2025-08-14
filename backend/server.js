@@ -25,13 +25,13 @@ mongoose.connect(process.env.MONGO_URI)
 io.on('connection', (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    // Lấy tin nhắn cũ
+    // old mess
     socket.on('getMessages', async () => {
         const messages = await Message.find().sort({ createdAt: 1 });
         socket.emit('messages', messages);
     });
 
-    // Nhận tin nhắn mới
+    // new mess
     socket.on('sendMessage', async (data) => {
         const newMsg = new Message({
             username: data.username,
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
         });
         await newMsg.save();
 
-        // Gửi lại cho tất cả client
+        // 
         io.emit('newMessage', newMsg);
     });
 

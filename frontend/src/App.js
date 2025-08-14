@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2>Messenger Clone</h2>
+      <h2>Chat</h2>
       <input 
         placeholder="Your name"
         value={username}
